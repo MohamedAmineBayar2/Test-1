@@ -1,0 +1,12 @@
+
+<h1>Book Details</h1>
+
+<div class="container">
+    {% if book is defined %}
+        <h2>{{ book.id }}</h2>
+        <h2>{{ book.title }}</h2>
+        <h2>{{ book.PublicationDate|Date}}</h2>
+    {% else %}
+        <p>Book details not available.</p>
+    {% endif %}
+</div>

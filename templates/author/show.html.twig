@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8; /* Light grayish-blue for a soft background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; /* Dark gray for the title */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff; /* White for the container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Slightly darker shadow for depth */
+            text-align: center; /* Center-align text for a cohesive look */
+        }
+
+        img {
+            border-radius: 8px;
+            max-width: 150px; /* Fixed width for uniformity */
+            height: auto;
+            margin-bottom: 15px; /* Space between image and text */
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #ff6b6b; /* Bright coral for the button */
+            color: white; /* White text for the button */
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        .back-link:hover {
+            background-color: #ff3d3d; /* Darker coral on hover */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Author Details</h1>
+
+<div class="container">
+    {% if author is defined %}
+        <img src="{{ asset(author.picture) }}" alt="{{ author.authorName }}">
+        <h2>{{ author.authorName|upper }}</h2>
+        <p><strong>Number of Books:</strong> {{ author.nbrBooks }}</p>
+
+        <a href="{{ path('show_authors') }}" class="back-link">Back to Author List</a>
+    {% else %}
+        <p>Author details not available.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

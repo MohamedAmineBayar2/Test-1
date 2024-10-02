@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8; /* Light grayish-blue background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; /* Dark gray for the title */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Remove double borders */
+            margin: 20px 0; /* Space around the table */
+        }
+
+        th {
+            background-color: #6c63ff; /* Modern purple header */
+            color: white; /* White text for contrast */
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #e0e0e0; /* Light border for cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        img {
+            border-radius: 8px; /* Rounded corners for images */
+            max-width: 80px; /* Fixed width for uniformity */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .show-details {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #ff6b6b; /* Bright coral for button */
+            color: white; /* White text for button */
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .show-details:hover {
+            background-color: #ff3d3d; /* Darker coral on hover */
+        }
+
+        .summary {
+            text-align: center; /* Center align the summary text */
+            margin-top: 20px; /* Margin for spacing */
+            font-size: 18px; /* Slightly larger text */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Authors List</h1>
+
+{% if authors is defined and authors is not empty %}
+    {% set totalBooks = 0 %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Author Name</th>
+                <th>Number of Books</th>
+                <th>Image</th>
+                <th>Show Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr>
+                {% set totalBooks = totalBooks + author.nbrBooks %}
+                <td>{{ author.id }}</td>
+                <td>{{ author.authorName|upper }}</td>
+                <td>{{ author.nbrBooks }}</td>
+                <td><img src="{{ asset(author.picture) }}" alt="{{ author.authorName }}"></td>
+                <td><a href="{{ path('author_details', { 'id': author.id }) }}" class="show-details">Show Author</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <h2>This table contains {{ authors|length }} authors and {{ totalBooks }} books.</h2>
+    </div>
+{% else %}
+    <h1>The table is not defined or empty.</h1>
+{% endif %}
+
+</body>
+</html>
